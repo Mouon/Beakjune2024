@@ -8,13 +8,11 @@ import java.util.Arrays;
 public class Q1463 {
     static int dp[];
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int num=Integer.parseInt(br.readLine());
         dp = new int[num+1];
         Arrays.fill(dp,-1);
         System.out.println(recur(num));
-
     }
 
     static int recur(int num) {
