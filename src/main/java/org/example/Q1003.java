@@ -7,9 +7,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Q1003 {
-
-    static int count1;
-    static int count0;
+    
     static int[][] dp =new int[41][2];
     public static void main(String[] args) throws IOException {
 
