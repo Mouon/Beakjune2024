@@ -17,6 +17,7 @@ public class Q11726 {
             dp[i]=(dp[i-1]+dp[i-2])%10007;
         }
 
+
         System.out.print(dp[n]);
 
     }
