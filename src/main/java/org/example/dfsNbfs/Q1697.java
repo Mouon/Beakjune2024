@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dfsNbfs;
 
 import java.util.PriorityQueue;
 import java.util.Scanner;
