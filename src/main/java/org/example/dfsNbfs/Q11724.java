@@ -1,13 +1,15 @@
 package org.example.dfsNbfs;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
-public class Q24479 {
-    static int N,M,R,count=0;
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+public class Q11724 {
+    static int N,M;
     static boolean[] visited;
-    public static void main(String[] args) throws IOException {
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    public static void main(String[] args)  {
 
         Scanner scan = new Scanner(System.in);
         String str = scan.nextLine();
@@ -32,39 +34,16 @@ public class Q24479 {
             graph.get(v).add(u);
         }
 
-
-        for (int i = 1; i <= N; i++) {
-            if (!visited[i]) {
-                bfs(i);
-                count++;
-            }
-        }
-
-        System.out.println(count);
-
     }
 
-    static void bfs(int cur) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(cur);
+    static void dfs(int cur){
         visited[cur]=true;
+        Collections.sort(graph.get(cur));
 
-        while(!queue.isEmpty()){
-            int node = queue.poll();
-
-            Collections.sort(graph.get(node));
-            for(int neighbor: graph.get(node)){
-                if(!visited[neighbor]){
-                    visited[neighbor]=true;
-                    queue.offer(neighbor);
-                }
+        for(int node : graph.get(cur)){
+            if(!visited[node]){
+                dfs(node);
             }
-
         }
-
     }
-
-
 }
-
-

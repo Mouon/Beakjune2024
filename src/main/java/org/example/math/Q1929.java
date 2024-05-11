@@ -1,4 +1,4 @@
-package org.example;
+package org.example.math;
 
 import java.io.IOException;
 import java.util.Arrays;

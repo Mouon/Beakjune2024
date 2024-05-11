@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dfsNbfs;
 
 import java.io.IOException;
 import java.util.PriorityQueue;
