@@ -10,7 +10,7 @@ public class Q2501 {
         Scanner scan = new Scanner(System.in);
         String str = scan.nextLine();
         String[] strNum = str.split(" ");
-
+        int j=1;
 
         int N = Integer.parseInt(strNum[0]);
         int K = Integer.parseInt(strNum[1]);
@@ -19,7 +19,7 @@ public class Q2501 {
 
         for(int i=1;i<=N;i++){
             if(N%i==0){
-                M[i]=i;
+                M[j++]=i;
             }
         }
 
