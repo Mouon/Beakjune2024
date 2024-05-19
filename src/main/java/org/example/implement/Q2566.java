@@ -34,7 +34,6 @@ public class Q2566 {
 
     }
 
-
     public static int findMax(int[][] arrays){
         return Arrays.stream(arrays)
                 .flatMapToInt(Arrays::stream)
