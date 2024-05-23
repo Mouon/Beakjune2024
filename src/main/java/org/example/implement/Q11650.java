@@ -21,6 +21,8 @@ public class Q11650 {
             XY[i][1] = temp[1];
         }
 
+//        Arrays.sort(XY);
+
         Arrays.sort(XY, new Comparator<String[]>() {
             @Override
             public int compare(String[] o1, String[] o2) {
