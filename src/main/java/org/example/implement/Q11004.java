@@ -20,7 +20,6 @@ public class Q11004 {
             numbers[i] = (Integer.parseInt(st.nextToken()));
         }
 
-
         Arrays.sort(numbers);
 
         System.out.println(numbers[K-1]);
