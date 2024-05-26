@@ -21,6 +21,7 @@ public class Q2798 {
             num[i]=Integer.parseInt(strNum[i]);
         }
 
+
         for(int i=0;i<N-2;i++){
             for(int j=1;j<N-1-i;j++){
                 for(int k=1+j;k<N-i;k++){
