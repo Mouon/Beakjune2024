@@ -1,43 +1,35 @@
 package org.example.implement;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Q10816 {
     public static void main(String[] args) throws Exception {
         StringBuilder sb = new StringBuilder();
         Scanner scan = new Scanner(System.in);
+
         int N = scan.nextInt();
-        scan.nextLine();
-        String str = scan.nextLine();
-        String[] strNum1 = str.split(" ");
+        int[] numbers = new int[N];
+        for (int i = 0; i < N; i++) {
+            numbers[i] = scan.nextInt();
+        }
+
         int K = scan.nextInt();
-        scan.nextLine();
-        int[] num = new int[K];
-        String str2 = scan.nextLine();
-        String[] strNum2 = str2.split(" ");
-
-        for(String s : strNum1){
-            for(int i=0;i<K;i++){
-               if(strNum2[i].equals(s)){
-                   num[i]+=1;
-               }
-            }
+        int[] queries = new int[K];
+        for (int i = 0; i < K; i++) {
+            queries[i] = scan.nextInt();
         }
 
-//        for(int i=0;i<strNum1.length;i++){
-//            System.out.print(" "+strNum1[i]+" ");
-//        }
-//
-//        System.out.println();
-//
-//        for(int i=0;i<K;i++){
-//            System.out.print(strNum2[i]+" ");
-//        }
-//        System.out.println();
-
-        for(int i=0;i<K;i++){
-            sb.append(num[i]+" ");
+        Map<Integer, Integer> countMap = new HashMap<>();
+        for (int num : numbers) {
+            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
         }
+
+        for(int num : queries){
+            sb.append(countMap.getOrDefault(num, 0)+" ");
+        }
+
 
 
         System.out.println(sb);
