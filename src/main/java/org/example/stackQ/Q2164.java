@@ -1,4 +1,4 @@
-package org.example.implement;
+package org.example.stackQ;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
