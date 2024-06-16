@@ -34,11 +34,18 @@ public class Q15652 {
             return;
         }
 
+//        for(int i =at;i<N;i++){
+//            arr[depth]=i;
+//            dfs(i,depth+1);
+//        }
+
         /** 1부터 N까지 요소의 조합이니 N을 범위에 포함해야지! */
         for(int i = at;i<=N;i++){
             arr[depth] = i;
             dfs(i,depth+1); /** 배열의 다음요소는 지금 요소랑 중복되면 안되니까 i+1을 at 전달해서 그 뒤 요소의 조합을 찾으라고 탐색을 보냄 */
         }
+        /** 머리로는 힘들지만 아무튼 그런게 있음
+         *  상상하다보면 이해됨 */
 
     }
 }
