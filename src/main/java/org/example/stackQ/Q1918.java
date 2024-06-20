@@ -53,9 +53,6 @@ public class Q1918 {
             case "*":
             case "/":
                 return 2;
-            case "(":
-            case ")":
-                return 0;
             default:
                 return -1;
         }
