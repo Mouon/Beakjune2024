@@ -8,7 +8,7 @@ public class Q15663 {
     public static int[] arr;
     public static int N, M;
     public static int[] isThere;
-
+    public static int lastDept;
 
     public static boolean[] visited;
 
