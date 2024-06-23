@@ -25,19 +25,20 @@ public class Q1149 {
 
             }
         }
+
         dp[0][0]=RGB[0][0];
         dp[0][1]=RGB[0][1];
         dp[0][2]=RGB[0][2];
 
         for (int i = 1; i < M; i++) {
-            dp[i][0] = Math.min(dp[i-1][1], dp[i-1][2]) + RGB[i][0];
-            dp[i][1] = Math.min(dp[i-1][0], dp[i-1][2]) + RGB[i][1];
-            dp[i][2] = Math.min(dp[i-1][0], dp[i-1][1]) + RGB[i][2];
+            dp[i][0]=Math.min(dp[i-1][1],dp[i-1][2])+RGB[i][0];
+            dp[i][1]=Math.min(dp[i-1][2],dp[i-1][0])+RGB[i][1];
+            dp[i][2]=Math.min(dp[i-1][1],dp[i-1][0])+RGB[i][2];
         }
 
-        int result = Math.min(dp[M-1][0],Math.min(dp[M-1][1],dp[M-1][2]));
-        System.out.println(result);
-        }
+
+        System.out.println(Math.min(dp[M-1][2],Math.min(dp[M-1][0],dp[M-1][1])));
+
 
     }
-
+}
