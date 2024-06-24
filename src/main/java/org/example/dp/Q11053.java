@@ -44,7 +44,7 @@ public class Q11053 {
         }
 
         for(int i=0;i<K;i++){
-            if(arr[K] > arr[i] && max[K] < max[i] + 1){
+            if(arr[K]>arr[i]&&max[K]<max[i]+1){
                 max[K] = max[i] + 1; /** max 값을 계속 바꿈 */
             }
         }
