@@ -1,4 +1,4 @@
-package org.example.dfsNbfs;
+package org.example.tree;
 
 import java.io.IOException;
 
