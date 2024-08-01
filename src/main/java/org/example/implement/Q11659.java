@@ -11,35 +11,25 @@ public class Q11659 {
 
     public static void main(String[] args) throws Exception {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
-        StringTokenizer str = new StringTokenizer(br.readLine());
-        int[] num = new int[N];
-        int[] ans = new int[N];
-        for(int i=0;i<N;i++){
-            num[i]=Integer.parseInt(str.nextToken());
+        BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer stringTokenizer = new StringTokenizer(buf.readLine());
+        int N=Integer.parseInt(stringTokenizer.nextToken());
+        int M=Integer.parseInt(stringTokenizer.nextToken());
+        long[] sumArr = new long[N+1];
+        long[] ans = new long[M];
+        stringTokenizer = new StringTokenizer(buf.readLine());
+        for(int i=1;i<N+1;i++){
+            sumArr[i]=sumArr[i-1]+Integer.parseInt(stringTokenizer.nextToken());
         }
-        ans[0]=num[0];
-
-        for(int i=1;i<N;i++){
-            ans[i] += ans[i-1]+num[i];
+        for(int i=0;i<M;i++){
+            stringTokenizer = new StringTokenizer(buf.readLine());
+            int st=Integer.parseInt(stringTokenizer.nextToken());
+            int ed=Integer.parseInt(stringTokenizer.nextToken());
+            ans[i]=sumArr[ed]-sumArr[st-1];
         }
-
-//
-//        for(int i=0;i<N;i++){
-//            System.out.println(ans[i]);
-//        }
-
-        for(int i=0;i<K;i++){
-            st = new StringTokenizer(br.readLine());
-            int S = Integer.parseInt(st.nextToken())-1;
-            int E = Integer.parseInt(st.nextToken())-1;
-            System.out.println(ans[E]-ans[S]+num[S]);
+        for(int i=0;i<M;i++){
+            System.out.println(ans[i]);
         }
-
-
 
     }
 }
