@@ -12,15 +12,17 @@ public class Q11725 {
     static  boolean[] isVisit;
     static  int [] parent;
 
+    static StringTokenizer st ;
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(br.readLine());
         isVisit = new boolean[N+1];
 
         list = new ArrayList[N+1];
+        parent = new int[N+1];
         for(int i=0;i<N+1;i++){
             list[i] = new ArrayList<>();
         }
@@ -36,7 +38,7 @@ public class Q11725 {
 
         dfs(1);
 
-        for(int i=0;i<N;i++){
+        for(int i=2;i<parent.length;i++){
             System.out.println(parent[i]);
         }
 
