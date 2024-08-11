@@ -1,4 +1,4 @@
-package org.example.tree;
+package org.example.stackQ;
 
 import java.io.BufferedReader;
 import java.io.IOException;
