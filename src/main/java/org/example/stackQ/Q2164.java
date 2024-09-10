@@ -1,35 +1,25 @@
 package org.example.stackQ;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Q2164 {
     public static void main(String[] args) throws Exception {
 
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
-        Deque<Integer> deque = new ArrayDeque<>();
+        Queue<Integer> queue = new ArrayDeque<>();
 
-        for(int i=0; i<N;i++){
-            deque.add(i+1);
+        for (int i=1;i<=N;i++){
+            queue.add(i);
         }
 
-        while (true){
-
-            int temp;
-            if(deque.size()==1){
-                break;
-            }
-            deque.removeFirst();
-            temp=deque.removeFirst();
-            deque.addLast(temp);
-
+        while (queue.size()!=1){
+            queue.remove();
+            int temp = queue.remove();
+            queue.add(temp);
         }
 
-        System.out.println(deque.peekLast());
-
+        System.out.println(queue.remove());
 
     }
 }
