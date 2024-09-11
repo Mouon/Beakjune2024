@@ -13,28 +13,26 @@ public class Q11286 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        PriorityQueue<Integer> minQ =
-                new PriorityQueue<>(new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer o1, Integer o2) {
-                        if (Math.abs(o1) == Math.abs(o2)) return o1 - o2;
-                        else return Math.abs(o1) - Math.abs(o2);
-                    }
-                });
+        PriorityQueue<Integer> pq =new PriorityQueue<>((o1,o2)-> {
+            int num1 = Math.abs(o1);
+            int num2 = Math.abs(o2);
+            if(num1==num2){
+                return o1>o2 ? 1:-1;
+            }
+            return num1-num2;//return num1<num2 ? -1:1; 음수가 우선순위
+        });
 
         for(int i=0;i<N;i++){
-            int input=Integer.parseInt(br.readLine());
-
+            int input = Integer.parseInt(br.readLine());
             if(input!=0){
-                minQ.add(input);
-            }else {
-                if(!minQ.isEmpty()){
-                    System.out.println(minQ.poll());
+                pq.offer(input);
+            } else {
+                if(!pq.isEmpty()){
+                 System.out.println(pq.poll());
                 }else {
-                    System.out.println(0);
+                    System.out.println("0");
                 }
             }
         }
-
     }
 }
