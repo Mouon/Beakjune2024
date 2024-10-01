@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
+ * 뱀의 꼬리 짜른다 -> 선입선출
+ *
  * 뱀을 큐로 구현했다가 수정
  * */
 
@@ -16,7 +18,7 @@ public class Q3190 {
 
     /** 방향순서 난관 오른쪽 기준 모호
      * 오른쪽, 아래쪽, 왼쪽, 위쪽
-     * 배열의 [][]랑 (,)이거랑 헷갈려서 해맴
+     * 배열의 [][]랑 (,)이거랑 헷갈려서 헤맴
      * */
     static int[] dx = { 0, 1, 0, -1 };
     static int[] dy = { 1, 0, -1, 0 };
