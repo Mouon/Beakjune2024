@@ -4,27 +4,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Q1541 {
+    static String[] arr;
+    static ArrayList<Long> list;
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         String str = scan.nextLine();
-        String[] arr = str.split("-");
-        ArrayList<Long> list = new ArrayList<>();
+        arr = str.split("-");
+        list = new ArrayList<>();
+        calSum();
+        System.out.println(calMinus());
 
-        for (int i=0;i< arr.length;i++){
-            String[] temp = arr[i].split("\\+");
-            long tempSum = 0;
-            for (String s : temp) {
-                tempSum += Long.parseLong(s);
+    }
+
+    public static void calSum(){
+        for(String num : arr){
+            if(num.length()>=2){
+                int sum=0;
+                String[] temp = num.split("\\+");
+                for (int i=0;i<temp.length;i++){
+                    sum+=Integer.parseInt(temp[i]);
+                }
+                list.add((long) sum);
+            }else {
+                list.add(Long.valueOf(num));
             }
-            list.add(tempSum);
         }
+    }
 
-        long sum= list.get(0);
-        for (int i=1;i<list.size();i++){
-            sum-= list.get(i);
+    public static long calMinus(){
+        long result = list.get(0);
+        for(int j=1;j<list.size();j++){
+            result-=list.get(j);
         }
-        System.out.println(sum);
-
+        return result;
     }
 }
