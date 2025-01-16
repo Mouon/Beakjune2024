@@ -59,8 +59,8 @@ public class Q1759 {
         // 백트래킹 공식
         for (int i = start; i < C; i++) {
             pwd.add(letters[i]);
-            generatePassword(length + 1, i + 1);
-            pwd.remove(pwd.size() - 1);
+            generatePassword(i+1,i+1);
+            pwd.remove(pwd.size()-1);
         }
     }
 
@@ -80,26 +80,3 @@ public class Q1759 {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-//    // 정은이 버전
-//    public static void main(String[] args) throws IOException{
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        StringTokenizer st = new StringTokenizer(br.readLine());
-//        int l = Integer.parseInt(st.nextToken());
-//        int c = Integer.parseInt(st.nextToken());
-//
-//        ArrayList
-//        for(int i = 0; i < c; i++){
-//
-//        }
-//
-//    }
