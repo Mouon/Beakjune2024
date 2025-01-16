@@ -1,7 +1,9 @@
 package org.example.dfsNbfs;
 
 import java.util.*;
-
+/**
+ * dfs의 전형적인 문제
+ * */
 public class Q2606 {
     static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
     static boolean[] visited;
