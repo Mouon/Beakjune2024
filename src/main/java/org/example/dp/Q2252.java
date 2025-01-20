@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Q2252 {
     static int N, M;
-    static ArrayList<Integer>[] adj;
+    static ArrayList<Integer>[] arr;
     static int[] indegree;
 
     public static void main(String[] args) throws IOException {
@@ -17,11 +17,14 @@ public class Q2252 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        adj = new ArrayList[N + 1];
+        arr = new ArrayList[N + 1];
+        /**
+         * 진입 차수
+         */
         indegree = new int[N + 1];
 
         for (int i = 1; i <= N; i++) {
-            adj[i] = new ArrayList<>();
+            arr[i] = new ArrayList<>();
         }
 
         for (int i = 0; i < M; i++) {
@@ -29,10 +32,11 @@ public class Q2252 {
             int former = Integer.parseInt(st.nextToken());
             int after = Integer.parseInt(st.nextToken());
 
-            adj[former].add(after);
+            arr[former].add(after);
             indegree[after]++;
         }
 
+        // 위상 정렬 위한 리스트..
         Queue<Integer> queue = new LinkedList<>();
 
         for (int i = 1; i <= N; i++) {
@@ -45,17 +49,17 @@ public class Q2252 {
 
         while (!queue.isEmpty()) {
             int current = queue.poll();
-            sb.append(current).append(" ");
-
-            for (int next : adj[current]) {
-                indegree[next]--; // 진입 차수 감소
-                if (indegree[next] == 0) {
-                    queue.offer(next); // 진입 차수가 0이면 큐에 넣음
+            sb.append(current+" ");
+            for(int next : arr[current]){
+                indegree[next]--;
+                if(indegree[next]==0){
+                    queue.add(next);
                 }
             }
+
         }
 
         // 결과 출력
-        System.out.println(sb.toString().trim());
+        System.out.println(sb);
     }
 }
