@@ -23,6 +23,7 @@ public class Q2252 {
          */
         indegree = new int[N + 1];
 
+
         for (int i = 1; i <= N; i++) {
             arr[i] = new ArrayList<>();
         }
@@ -36,27 +37,25 @@ public class Q2252 {
             indegree[after]++;
         }
 
-        // 위상 정렬 위한 리스트..
         Queue<Integer> queue = new LinkedList<>();
 
-        for (int i = 1; i <= N; i++) {
-            if (indegree[i] == 0) {
+        for(int i=1;i<=N;i++){
+            if(indegree[i]==0){
                 queue.offer(i);
             }
         }
 
         StringBuilder sb = new StringBuilder();
 
-        while (!queue.isEmpty()) {
-            int current = queue.poll();
-            sb.append(current+" ");
-            for(int next : arr[current]){
-                indegree[next]--;
-                if(indegree[next]==0){
-                    queue.add(next);
+        while (!queue.isEmpty()){
+            int temp = queue.poll();
+            sb.append(temp+" ");
+            for(int num : arr[temp]){
+                indegree[num]--;
+                if(indegree[num]==0){
+                    queue.add(num);
                 }
             }
-
         }
 
         // 결과 출력
