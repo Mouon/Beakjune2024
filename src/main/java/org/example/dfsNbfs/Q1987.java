@@ -3,15 +3,14 @@ package org.example.dfsNbfs;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Q1987 {
     static char[][] board;
-    static int R, C;
-    static boolean[] isUsed; // 알파벳 중복 체크
-    static int max = 0; // 최대 경로 길이
-    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static  int R,C;
+    static boolean[] visited;
+    static ArrayList<Integer> count = new ArrayList<>();
+    static int max = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -22,17 +21,16 @@ public class Q1987 {
         C = Integer.parseInt(st.nextToken());
 
         board = new char[R][C];
-        isUsed = new boolean[26]; // 알파벳 26개에 대한 중복 체크
+        visited = new boolean[26];
 
         for (int i = 0; i < R; i++) {
-            board[i] = br.readLine().toCharArray(); // 문자열을 char 배열로 저장
+            board[i] = br.readLine().toCharArray();
         }
-
-
 
         dfs(0,0,1);
 
         System.out.println(max);
+
 
     }
 
@@ -42,21 +40,21 @@ public class Q1987 {
             return;
         }
 
-        int alphabetIndex = board[w][h] - 'A';
+        int alphaIndex = board[w][h] - 'A';
 
-        if (isUsed[alphabetIndex]) {
-            return;
+        if(visited[alphaIndex]){
+           return;
         }
-
-        isUsed[alphabetIndex] = true;
-        max = Math.max(max, depth); // 최대 경로 갱신
+        visited[alphaIndex] = true;
+        max = Math.max(max,depth);
 
         dfs(w + 1, h, depth + 1); // 아래
         dfs(w - 1, h, depth + 1); // 위
         dfs(w, h + 1, depth + 1); // 오른쪽
         dfs(w, h - 1, depth + 1); // 왼쪽
 
-        isUsed[alphabetIndex] = false;
+        visited[alphaIndex] = false;
+
     }
 
 }
