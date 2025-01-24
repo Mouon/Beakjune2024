@@ -37,20 +37,28 @@ public class Q16236 {
         int move = 0; // 움직인 총 거리
 
         while (true) {
+            /**
+             * y좌표, x좌표, 움직인 거리})을 사용하여 Queue에 넣어주었다.
+             * 거리가 다르다면 거리 순으로 오름차순,
+             * y축 좌표가 다르다면 y축 좌표로 오름차순 모두 같다면 x축 좌표로 오름차순 정렬
+             * */
             PriorityQueue<int[]> que = new PriorityQueue<>((o1, o2) ->
-                    o1[2] != o2[2] ? Integer.compare(o1[2], o2[2]) : (o1[0] != o2[0] ? Integer.compare(o1[0], o2[0]) : Integer.compare(o1[1], o2[1]))
+                    o1[2] != o2[2] ? Integer.compare(o1[2], o2[2]) :
+                            (o1[0] != o2[0] ? Integer.compare(o1[0], o2[0]) : Integer.compare(o1[1], o2[1]))
             );
             boolean[][] visit = new boolean[N][N];
 
-            que.add(new int[]{cur[0], cur[1], 0}); // y좌표, x좌표, 이동한 거리
+            // y, x, 이동한 거리
+            que.add(new int[]{cur[0], cur[1], 0});
             visit[cur[0]][cur[1]] = true;
 
-            boolean ck = false; // 상어가 먹이를 먹었는지 체크할 변수
+            // 상어가 먹이를 먹었는지 체크할 변수
+            boolean ck = false;
 
             while (!que.isEmpty()) {
                 cur = que.poll();
 
-                if (map[cur[0]][cur[1]] != 0 && map[cur[0]][cur[1]] < size) { // 먹이가 있으면서 상어의 사이즈보다 작다면?
+                if (map[cur[0]][cur[1]] != 0 && map[cur[0]][cur[1]] < size) { // 먹이가 있으면서 상어의 사이즈보다 작으면?
                     map[cur[0]][cur[1]] = 0; // 물고기를 제거
                     eat++;
                     move += cur[2]; // 움직인 거리를 총 움직인 거리에 추가
@@ -59,19 +67,22 @@ public class Q16236 {
                 }
 
                 for (int k = 0; k < 4; k++) {
-                    int ny = cur[0] + dy[k];
-                    int nx = cur[1] + dx[k];
+                    int my = cur[0] + dy[k];
+                    int mx = cur[1] + dx[k];
 
-                    if (ny < 0 || nx < 0 || nx >= N || ny >= N || visit[ny][nx] || map[ny][nx] > size)
+                    if (my < 0 || mx < 0 || mx >= N || my >= N || visit[my][mx] || map[my][mx] > size){
                         continue;
+                    }
 
-                    que.add(new int[]{ny, nx, cur[2] + 1});
-                    visit[ny][nx] = true;
+                    que.add(new int[]{my, mx, cur[2] + 1});
+                    visit[my][mx] = true;
                 }
             }
 
-            if (!ck) // 큐가 비워질 때까지 먹이를 먹은적이 없다면, 더 이상 먹은 물고기가 없으므로 탈출
+            // 큐가 비워질 때까지 먹이를 먹은적이 없다면, 더 이상 먹은 물고기가 없으므로 탈출
+            if (!ck) {
                 break;
+            }
 
             if (size == eat) { // 사이즈와 먹이를 먹은 수가 동일하다면 상어의 크기를 증가
                 size++;
