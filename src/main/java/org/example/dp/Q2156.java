@@ -1,7 +1,9 @@
 package org.example.dp;
 
 import java.util.Scanner;
-
+/**
+ * DP의 뼈를 찌르는 문제 꼭 다시본다면 다시 풀어보기!
+ * */
 public class Q2156 {
     static int[] dp;
     static int[] wines;
