@@ -1,48 +1,52 @@
 package org.example.dfsNbfs;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class Q11724 {
-    static int N,M;
-    static boolean[] visited;
+    static int N,M,count = 0;
     static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+    static boolean[] visited;
     public static void main(String[] args)  {
 
-        Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
-        String[] arr1=str.split(" ");
-        N = Integer.parseInt(arr1[0]);
-        M = Integer.parseInt(arr1[1]);
-        graph = new ArrayList<>();
-        visited= new boolean[N+1];
-        for(int i=0;i<=N;i++) {
-            graph.add(new ArrayList<Integer>());
+        Scanner scan =  new Scanner(System.in);
+        N = scan.nextInt();
+        M = scan.nextInt();
+
+        visited = new boolean[N+1];
+        for(int i = 0; i <= N; i++) {
+            graph.add(new ArrayList<>());
         }
-
-        int u;
-        int v;
-
         for(int i=0;i<M;i++){
-            str = scan.nextLine();
-            String[] arr2=str.split(" ");
-            u=Integer.parseInt(arr2[0]);
-            v=Integer.parseInt(arr2[1]);
-            graph.get(u).add(v);
-            graph.get(v).add(u);
+            int node1 = scan.nextInt();
+            int node2 = scan.nextInt();
+            graph.get(node1).add(node2);
+            graph.get(node2).add(node1);
         }
+
+        for(int i = 1;i<N+1;i++){
+            if(!visited[i]){
+                bfs(i);
+                count++;
+            }
+        }
+
+        System.out.println(count);
 
     }
 
-    static void dfs(int cur){
-        visited[cur]=true;
-        Collections.sort(graph.get(cur));
+    static void bfs(int cur){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(cur);
+        visited[cur] = true;
 
-        for(int node : graph.get(cur)){
-            if(!visited[node]){
-                dfs(node);
+        while(!queue.isEmpty()){
+            int node = queue.poll();
+            Collections.sort(graph.get(node));
+            for(int friend : graph.get(node)){
+                if(!visited[friend]){
+                    visited[friend] = true;
+                    queue.offer(friend);
+                }
             }
         }
     }
