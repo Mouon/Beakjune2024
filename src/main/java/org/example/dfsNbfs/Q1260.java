@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Q1260 {
-    static int N, M, R, countDfs = 1, countBfs = 1;
+    static int N, M, V, countDfs = 1, countBfs = 1;
 
     static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
     static boolean[] visitedDfs;
@@ -12,64 +12,58 @@ public class Q1260 {
     static boolean[] foundBfs;
 
 
-    static int[] resultDfs;
-    static int[] resultBfs;
+    static ArrayList<Integer> resultDfs = new ArrayList<>();
+    static ArrayList<Integer> resultBfs = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
-        int visitedCount=0;
         Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
-        String[] arr1 = str.split(" ");
-        N = Integer.parseInt(arr1[0]);
-        M = Integer.parseInt(arr1[1]);
-        R = Integer.parseInt(arr1[2]);
+
+        N = scan.nextInt();
+        M = scan.nextInt();
+        V = scan.nextInt();
+
         graph = new ArrayList<>();
         visitedDfs = new boolean[N + 1];
         visitedBfs = new boolean[N + 1];
         foundBfs = new boolean[N + 1];
 
-        resultDfs = new int[N + 1];
-        resultBfs = new int[N + 1];
 
         for (int i = 0; i <= N; i++) {
             graph.add(new ArrayList<Integer>());
         }
 
-        int u;
-        int v;
+        int node1;
+        int node2;
 
         for (int i = 0; i < M; i++) {
-            str = scan.nextLine();
-            String[] arr2 = str.split(" ");
-            u = Integer.parseInt(arr2[0]);
-            v = Integer.parseInt(arr2[1]);
-            graph.get(u).add(v);
-            graph.get(v).add(u);
+            node1 = scan.nextInt();
+            node2 = scan.nextInt();
+            graph.get(node1).add(node2);
+            graph.get(node2).add(node1);
         }
 
-        dfs(R);
-        bfs(R);
-        for (int i = 1; i <= N; i++) {
-            if (resultDfs[i] != 0) {
-                System.out.print(resultDfs[i] + " ");
-            }
+        dfs(V);
+
+        bfs(V);
+
+        for (int node : resultDfs){
+            System.out.print(node + " ");
         }
-        System.out.println("");
-        for (int i = 1; i <= N; i++) {
-            if (resultBfs[i] != 0) {
-                System.out.print(resultBfs[i] + " ");
-            }
+        System.out.println();
+        for (int node : resultBfs){
+            System.out.print(node + " ");
         }
+
     }
 
     static void dfs(int cur) {
         visitedDfs[cur] = true;
-        resultDfs[countDfs++] = cur;
-        Collections.sort(graph.get(cur));
+        resultDfs.add(cur);
 
-        for (int node : graph.get(cur)) {
-            if (!visitedDfs[node]) {
+        Collections.sort(graph.get(cur));
+        for(int node : graph.get(cur)){
+            if(!visitedDfs[node]){// 역참조 방지
                 dfs(node);
             }
         }
@@ -77,23 +71,21 @@ public class Q1260 {
 
     static void bfs(int cur) {
         Queue<Integer> queue = new LinkedList<>();
-        queue.offer(cur);
-        visitedBfs[cur]=true;
+        queue.add(cur);
+        visitedBfs[cur] = true;
+        resultBfs.add(cur);
 
-        while(!queue.isEmpty()){
-            int node = queue.poll();
-            resultBfs[countBfs++]=node;
-
-            Collections.sort(graph.get(node));
-            for(int neighbor: graph.get(node)){
-                if(!visitedBfs[neighbor]){
-                    visitedBfs[neighbor]=true;
-                    queue.offer(neighbor);
+        while (!queue.isEmpty()){
+            int nowNode = queue.poll();
+            Collections.sort(graph.get(cur));
+            for(int node : graph.get(nowNode)){
+                if(!visitedBfs[node]){
+                    visitedBfs[node] = true;
+                    queue.offer(node);
+                    resultBfs.add(node);
                 }
             }
-
         }
-
     }
 }
 
