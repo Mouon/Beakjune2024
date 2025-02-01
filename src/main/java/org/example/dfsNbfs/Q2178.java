@@ -76,8 +76,10 @@ public class Q2178  {
                 if(x>=0 && y>=0 && x<N && y<M){
                     if(miro[x][y]!=0&&!visited[x][y]){
                         visited[x][y] = true;
+                        int temp = miro[x][y];
                         miro[x][y] += miro[i][j];
                         search2(x,y);
+//                        miro[x][y] = temp;
                     }
                 }
             }
