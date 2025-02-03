@@ -62,7 +62,7 @@ public class Q2573 {
     static void bfs(int i, int j){
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{i,j});
-        visited[i][j] = true;
+        visited[i][j] = true; // 아주 좋은 초기화 방법! for 문 사용안하고도 초기화 가능함
 
         while (!queue.isEmpty()){
             int[] now = queue.poll();
