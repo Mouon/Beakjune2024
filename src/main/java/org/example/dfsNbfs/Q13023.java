@@ -41,14 +41,11 @@ public class Q13023 {
 
     static void DFS(int node, int depth){
 
-        if(depth == 4) {  // 깊이가 4면 노드 5개가 연결된 것
+        if(depth == 4) {
             found = true;
             return;
         }
 
-        if(depth==5){
-            return;
-        }
         visited[node] = true;
 
         for(int friend : friends.get(node)){
