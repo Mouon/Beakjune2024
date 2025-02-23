@@ -3,71 +3,62 @@ package org.example.dfsNbfs;
 import java.util.*;
 
 public class Q13913 {
-
+    static int[] graph;
     static int[] parent;
-    static int su;
-    static int dong;
-
+    static boolean[] visited;
+    static int N, M;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        su = scanner.nextInt();
-        dong = scanner.nextInt();
+        N = scanner.nextInt();
+        M = scanner.nextInt();
 
+        graph = new int[100001];
         parent = new int[100001];
-        Arrays.fill(parent, -1);
+        visited = new boolean[100001];
 
-        int time = bfs();
+        bfs(N);
 
-        System.out.println(time);
-
-        printPath();
+        System.out.println(graph[M]);
+        printPath(M);
     }
 
-    static int bfs() {
+    static void bfs(int start) {
         Queue<Integer> queue = new LinkedList<>();
-        queue.offer(su);
-        int[] timeTaken = new int[100001];
-        Arrays.fill(timeTaken, -1);
-        timeTaken[su] = 0;
+        queue.add(start);
+        visited[start] = true;
+        graph[start] = 0;
+        parent[start] = -1;
 
         while (!queue.isEmpty()) {
-            int curPos = queue.poll();
+            int now = queue.poll();
 
-            if (curPos == dong)
-                return timeTaken[curPos];;
+            if (now == M) return;
 
-            if (curPos * 2 <= 100000 && parent[curPos * 2] == -1) {
-                parent[curPos * 2] = curPos;
-                timeTaken[curPos * 2] = timeTaken[curPos] + 1;
-                queue.offer(curPos * 2);
-            }
-            if (curPos + 1 <= 100000 && parent[curPos + 1] == -1) {
-                parent[curPos + 1] = curPos;
-                timeTaken[curPos +1] = timeTaken[curPos] + 1;
-                queue.offer(curPos + 1);
-            }
-            if (curPos - 1 >= 0 && parent[curPos - 1] == -1) {
-                parent[curPos - 1] = curPos;
-                timeTaken[curPos -1] = timeTaken[curPos] + 1;
-                queue.offer(curPos - 1);
+            int[] next = {now - 1, now + 1, now * 2};
+
+            for (int i = 0; i < 3; i++) {
+                if (next[i] >= 0 && next[i] < 100001 && !visited[next[i]]) {
+                    queue.add(next[i]);
+                    visited[next[i]] = true;
+                    graph[next[i]] = graph[now] + 1;
+                    parent[next[i]] = now;
+                }
             }
         }
-        return -1;
     }
 
-    static void printPath() {
-        Stack<Integer> path = new Stack<>();
-        int idx = dong;
-
-        while (idx != su) {
-            path.push(idx);
-            idx = parent[idx];
+    static void printPath(int target) {
+        List<Integer> path = new ArrayList<>();
+        while (target != -1) {
+            path.add(target);
+            target = parent[target];
         }
-        path.push(su);
+        Collections.reverse(path);
 
-        while (!path.isEmpty()) {
-            System.out.print(path.pop() + " ");
+        for (int num : path) {
+            System.out.print(num + " ");
         }
+        System.out.println();
     }
 }
