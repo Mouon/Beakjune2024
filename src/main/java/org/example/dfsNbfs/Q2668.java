@@ -1,66 +1,54 @@
 package org.example.dfsNbfs;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Q2668 {
-    static int N;
-    static int[][] area;
-    static boolean[][] visited;
-    static boolean succeed;
-    public static int[] dx = {1,  0};
-    public static int[] dy = {0, 1};
-
-
+    static int N,C,M=0;
+    static int[] arr;
+    static ArrayList<Integer> ans = new ArrayList<>();
+    static boolean[] visited, finished;
+    static List<Integer> result = new ArrayList<>();
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+
         N = scan.nextInt();
 
-        area = new int[N][N];
-        visited = new boolean[N][N];
+        arr = new int[N + 1];
+        visited = new boolean[N + 1];
+        finished = new boolean[N + 1];
 
 
-        for(int i=0;i<N;i++){
-            for (int j=0;j<N;j++){
-                area[i][j] = scan.nextInt();
+        for (int i = 1; i <= N; i++) {
+            arr[i] = scan.nextInt();
+        }
+
+        for (int i = 1; i <= N; i++) {
+            if (!visited[i]) {
+                search(i, new ArrayList<>());
             }
         }
 
-        BFS(0,0);
-
-        if(succeed){
-            System.out.println("HaruHaru");
-        }else {
-            System.out.println("Hing");
+        Collections.sort(result);
+        System.out.println(result.size());
+        for (int num : result) {
+            System.out.println(num);
         }
-
     }
 
-    static void BFS(int x,int y) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
-        visited[x][y] = true;
-
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
-            int curX = now[0];
-            int curY = now[1];
-            if(area[curX][curY]==-1){
-                succeed = true;
-                return;
+    static void search(int node, List<Integer> path){
+        if (visited[node]) {
+            if (path.contains(node)) {
+                int idx = path.indexOf(node);
+                result.addAll(path.subList(idx, path.size()));
             }
-            int jump = area[curX][curY];
-
-            for (int k = 0; k < 2; k++) {
-                int nextX = curX + dx[k] * jump;
-                int nextY = curY + dy[k] * jump;
-                if (nextX >= 0 && nextY >= 0 && nextX < N && nextY < N
-                        && !visited[nextX][nextY]) {
-                    visited[curX + dx[k]][curY + dy[k]] = true;
-                    queue.add(new int[]{nextX, nextY});
-                    }
-                }
-            }
+            return;
         }
+
+        visited[node] = true;
+        path.add(node);
+        search(arr[node], path);
+    }
 }
