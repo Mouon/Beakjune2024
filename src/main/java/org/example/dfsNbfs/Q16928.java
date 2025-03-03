@@ -2,6 +2,9 @@ package org.example.dfsNbfs;
 
 import java.util.*;
 
+/**
+* 문제를 잘읽자 ( 다 읽자! )
+ * */
 public class Q16928 {
     static int[] index = new int[100];
     static int N,M;
