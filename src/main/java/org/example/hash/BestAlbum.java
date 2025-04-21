@@ -24,7 +24,7 @@ class Solution {
         entryList.sort(new Comparator<Map.Entry<Integer, Integer>>() {
             @Override
             public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                if(o1.getValue()==o2.getValue()){
+                if(Objects.equals(o1.getValue(), o2.getValue())){
                     return o1.getKey() - o2.getKey();
                 }
                 return o2.getValue() - o1.getValue();
