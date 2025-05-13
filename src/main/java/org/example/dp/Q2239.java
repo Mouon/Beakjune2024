@@ -40,6 +40,7 @@ public class Q2239 {
 
         if(board[y][x] != 0){
             dfs(depth + 1);
+
         }else{
             for(int i = 1; i<=9; i++){
                 if(!isValid(y,x,i)){
