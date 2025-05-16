@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Q15681 {
-    static int N, R, Q ,D;
+    static int N, R, Q;
     static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
     static int[] subtreeSize;
     public static void main(String[] args) {
