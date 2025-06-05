@@ -1,7 +1,6 @@
 package org.example.dp;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Q10942 {
