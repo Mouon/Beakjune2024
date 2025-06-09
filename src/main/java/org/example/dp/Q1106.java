@@ -1,48 +1,44 @@
 package org.example.dp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+
+// 진짜 블로그를 봐도 모르겠음
 
 public class Q1106 {
-    static int dp[][];
-    static int[][] city ;
-
-    static int N;
 
     public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
-        String[] list = str.split(" ");
-        int C=Integer.parseInt(list[0]);
-        N=Integer.parseInt(list[1]);
-        dp=new int[C+1][];
-        city = new int[N+1][2];
-        for(int i=0;i<N;i++){
-            String cityInfo = scan.nextLine();
-            String[] cityValue = cityInfo.split(" ");
-            city[i][0]=Integer.parseInt(cityValue[0]);
-            city[i][1]=Integer.parseInt(cityValue[1]);
+        // 입력
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int c = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(st.nextToken());
+
+        int dp[] = new int[c+100];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for(int i=0; i<n; i++) {
+            st = new StringTokenizer(br.readLine());
+            int cost = Integer.parseInt(st.nextToken());
+            int customer = Integer.parseInt(st.nextToken());
+
+            for(int j=customer; j<c+100; j++) {
+                if (dp[j-customer] != Integer.MAX_VALUE)
+                    dp[j] = Math.min(dp[j], cost+dp[j-customer]);
+            }
         }
 
-        System.out.println(dp[C]);
+        int answer = Integer.MAX_VALUE;
 
-    }
-
-    static int recur(int remainingCustomers, int currentCity) {
-
-        if (remainingCustomers <= 0) return 0;
-        if (currentCity == N) return Integer.MAX_VALUE;
-        if (dp[currentCity][remainingCustomers] != 0) return dp[currentCity][remainingCustomers];
-
-        int minCost = Integer.MAX_VALUE;
-        for (int i = 0; i <= remainingCustomers / city[currentCity][1]; i++) {
-            int remainingCustomersAfterInvestment = remainingCustomers - (i * city[currentCity][1]);
-            int cost = i * city[currentCity][0] + recur(remainingCustomersAfterInvestment, currentCity + 1);
-            minCost = Math.min(minCost, cost);
+        for(int i=c; i<c+100; i++) {
+            answer = Math.min(answer, dp[i]);
         }
 
-        dp[currentCity][remainingCustomers] = minCost; // 결과를 저장
-        return minCost;
+        System.out.println(answer);
     }
-
 }
