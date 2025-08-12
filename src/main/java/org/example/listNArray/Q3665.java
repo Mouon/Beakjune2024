@@ -62,7 +62,6 @@ public class Q3665 {
                 continue;
             }
 
-            int result =0;
             StringBuilder sb = new StringBuilder();
             boolean isFinished = false;
             for(int i=1;i<=N;i++){
@@ -72,7 +71,6 @@ public class Q3665 {
                     break;
                 }
                 int from = queue.poll();
-                result++;
                 sb.append(from).append(" ");
                 for(int to : list[from]){
                     inDegree[to]--;
