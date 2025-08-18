@@ -22,18 +22,19 @@ public class Q1915 {
 
         index = new int[n+1][m+1];
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             String line = br.readLine();
-            for (int j = 1; j < m; j++) {
-                index[i][j] = line.charAt(j) - '0';
+            for (int j = 1; j <= m; j++) {
+                index[i][j] = line.charAt(j-1) - '0';
             }
         }
 
         int[][] psum = new int[n+1][m+1];
 
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                psum[i][j] = psum[i - 1][j] + psum[i][j - 1] - psum[i - 1][j - 1] + index[i][j];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                psum[i][j] = psum[i - 1][j] + psum[i][j - 1]
+                        - psum[i - 1][j - 1] + index[i][j];
             }
         }
 
@@ -46,12 +47,14 @@ public class Q1915 {
                     int idx = 1;
 
                     while (i+idx <= n && j + idx <=m){
-                        int space = psum[i + idx][j + idx] - psum[i + idx][j - 1] - psum[i - 1][j + idx]
+                        int space = psum[i + idx][j + idx] - psum[i + idx][j - 1]
+                                - psum[i - 1][j + idx]
                                 + psum[i - 1][j - 1];
 
-                        if (space != (idx+1)*(idx+1)) break;
-
                         idx++;
+
+                        if (space != (idx)*(idx)) break;
+
                         res = idx * idx;
                     }
 
