@@ -23,7 +23,6 @@ public class Q2252 {
          */
         indegree = new int[N + 1];
 
-
         for (int i = 1; i <= N; i++) {
             arr[i] = new ArrayList<>();
         }
