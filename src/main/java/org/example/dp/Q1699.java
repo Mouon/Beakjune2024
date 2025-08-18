@@ -25,7 +25,7 @@ public class Q1699 {
             dp[4] = 1;
         }
         if(N>=5){
-            dp[5] = 3;
+            dp[5] = 2;
         }
 
         if(N>=6){
